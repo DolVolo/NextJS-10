@@ -309,7 +309,7 @@ const getSampleData = (): Student[] => {
     { id: '6704101345', name: 'นายบุญนุชัย บุญเต็ม', gpa: 2.00 }
     // ... add more as needed
   ].map((student, index) => {
-    const [_title, ...nameParts] = student.name.split(' ');
+    const [, ...nameParts] = student.name.split(' '); // Remove title part
     const firstName = nameParts[0] || '';
     const lastName = nameParts.slice(1).join(' ') || '';
 
@@ -590,22 +590,24 @@ const usePortfolioStore = create<PortfolioStore>()(
       {
         name: 'portfolio-storage',
         version: 2, // Increment version to trigger migration
-        migrate: (persistedState: any, version: number) => {
+        migrate: (persistedState: unknown, version: number) => {
           console.log('Migrating portfolio store from version:', version);
           
           // Handle migration from version 1 to 2
-          if (version < 2) {
+          if (version < 2 && persistedState && typeof persistedState === 'object') {
+            const state = persistedState as { students?: Student[] };
+            
             // Ensure all students have the required fields and fix image paths
-            if (persistedState?.students) {
-              persistedState.students = persistedState.students.map((stu: any) => ({
+            if (state.students) {
+              state.students = state.students.map((stu: Student) => ({
                 ...stu,
-                activities: stu.activities?.map((act: any) => ({
+                activities: stu.activities?.map((act: Activity) => ({
                   ...act,
                   images: act.images?.map((img: string) => 
                     img.startsWith('/') ? img : (img.startsWith('image/') ? `/${img}` : `/image/${img}`)
                   ) || []
                 })) || [],
-                certificates: stu.certificates?.map((cer: any) => ({
+                certificates: stu.certificates?.map((cer: Certificate) => ({
                   ...cer,
                   images: cer.images?.map((img: string) => 
                     img.startsWith('/') ? img : (img.startsWith('image/') ? `/${img}` : `/image/${img}`)
