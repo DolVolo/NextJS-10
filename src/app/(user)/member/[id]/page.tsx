@@ -1,33 +1,31 @@
+'use client';
+
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-
-import { members } from "../members";
+import { useMemberStore } from "../../../store/member";
+import { useEffect, useState } from "react";
 
 type MemberPageProps = {
 	params: Promise<{ id: string }> | { id: string }; // Next 15 may pass a promise
 };
 
-export function generateStaticParams() {
-	return members.map((m) => ({ id: String(m.id) }));
-}
+export default function MemberDetailPage({ params }: MemberPageProps) {
+	const [resolvedParams, setResolvedParams] = useState<{ id: string } | null>(null);
+	const { getMemberById } = useMemberStore();
 
-export async function generateMetadata({ params }: MemberPageProps) {
-	const resolved = await Promise.resolve(params);
-	const idNum = Number(resolved.id);
-	const member = members.find((m) => m.id === idNum);
-	return {
-		title: member ? `${member.name} | Member ${member.id}` : "Member Not Found",
-	};
-}
+	useEffect(() => {
+		Promise.resolve(params).then(setResolvedParams);
+	}, [params]);
 
-export default async function MemberDetailPage({ params }: MemberPageProps) {
-	const resolved = await Promise.resolve(params);
-	const idNum = Number(resolved.id);
-	const member = members.find((m) => m.id === idNum);
+	if (!resolvedParams) {
+		return <div>Loading...</div>;
+	}
+
+	const idNum = Number(resolvedParams.id);
+	const member = getMemberById(idNum);
+	
 	if (!member) return notFound();
-
-	const info = members.find(m => m.id === idNum);
 
 	return (
 		<div className="min-h-screen bg-gray-100 p-6">
@@ -43,16 +41,16 @@ export default async function MemberDetailPage({ params }: MemberPageProps) {
 					{/* Header */}
 					<div className="p-6 border-b border-gray-200">
 						<div className="flex items-center">
-							{info?.image ? (
+							{member?.image ? (
 								<a
-									 href={`https://avatar.vercel.sh/${info.image}.png`}
+									 href={`https://avatar.vercel.sh/${member.image}.png`}
 									 target="_blank"
 									 rel="noopener noreferrer"
 									 className="mr-4 relative w-16 h-16 rounded-full ring-2 ring-offset-2 ring-blue-500 overflow-hidden group"
 									 title="Open full avatar"
 								>
 									<Image
-										src={`https://avatar.vercel.sh/${info.image}.png`}
+										src={`https://avatar.vercel.sh/${member.image}.png`}
 										alt={`${member.name} avatar`}
 										fill
 										sizes="64px"
@@ -79,32 +77,32 @@ export default async function MemberDetailPage({ params }: MemberPageProps) {
 								<span className="inline-block bg-blue-600 text-white text-sm px-4 py-2 rounded-full">
 									{member.role}
 								</span>
-								{info && (
+								{member && (
 									<div className="flex flex-wrap gap-3">
 										<span className="inline-flex items-center gap-1 text-xs font-medium bg-gray-100 border px-3 py-1 rounded-full text-black">
 											<svg className="w-3 h-3 text-blue-600" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8c1.657 0 3-1.567 3-3.5S13.657 1 12 1s-3 1.567-3 3.5S10.343 8 12 8Zm0 0v13m5-6c0 3.314-2.239 6-5 6s-5-2.686-5-6" /></svg>
-											Age: {info.age}
+											Age: {member.age}
 										</span>
 										<span className="inline-flex items-center gap-1 text-xs font-medium bg-gray-100 border px-3 py-1 rounded-full text-black">
 											<svg className="w-3 h-3 text-green-600" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8 21h8M12 21V3m0 0L8 7m4-4 4 4" /></svg>
-											Height: {info.height} cm
+											Height: {member.height} cm
 										</span>
 									</div>
 								)}
 							</div>
 						)}
 						
-						{info && (
+						{member && (
 							<>
 								<div className="mb-6">
 									<h2 className="text-xl font-semibold mb-3 text-black">Biography</h2>
-									<p className="text-black leading-relaxed">{info.bio}</p>
+									<p className="text-black leading-relaxed">{member.bio}</p>
 								</div>
 								
 								<div>
 									<h2 className="text-xl font-semibold mb-3 text-black">Key Skills</h2>
 									<div className="flex flex-wrap gap-2">
-										{info.skills.map((s) => (
+										{member.skills.map((s) => (
 											<span key={s} className="text-sm bg-gray-100 border px-3 py-1 rounded-lg text-black">
 												{s}
 											</span>

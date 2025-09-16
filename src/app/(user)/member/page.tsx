@@ -1,8 +1,12 @@
 // EXO Members page with admin styling
+'use client';
+
 import Link from "next/link";
-import { members } from "./members";
+import { useMembers } from "../../store/member";
 
 export default function MemberPage() {
+    const members = useMembers();
+    
     return (
         <div className="min-h-screen bg-gray-100 p-6">
             <div className="max-w-4xl mx-auto">
