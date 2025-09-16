@@ -187,7 +187,7 @@ const getSampleData = (): Student[] => {
         description: 'เข้ารอบ 32 ทีม แข่งขัน WRO ระดับประเทศ',
         year: '2019',
         level: 'national',
-        images: ['image/act1.png']
+        images: ['/image/act1.png']
       },
       {
         id: 'act2',
@@ -196,7 +196,7 @@ const getSampleData = (): Student[] => {
         year: '2019',
         level: 'national',
         rank: 'รองชนะเลิศอันดับที่ 1',
-        images: ['image/act2.png']
+        images: ['/image/act2.png']
       },
       {
         id: 'act3',
@@ -205,7 +205,7 @@ const getSampleData = (): Student[] => {
         year: '2019',
         level: 'province',
         rank: 'รองชนะเลิศอันดับที่ 1',
-        images: ['image/act3.png']
+        images: ['/image/act3.png']
       },
       {
         id: 'act4',
@@ -214,7 +214,7 @@ const getSampleData = (): Student[] => {
         year: '2019',
         level: 'district',
         rank: 'รองชนะเลิศอันดับที่ 2',
-        images: ['image/act4.png']
+        images: ['/image/act4.png']
       }
     ],
     certificates: [
@@ -224,7 +224,7 @@ const getSampleData = (): Student[] => {
         description: 'การแข่งขัน World Robot รายการ Robot Olympiad Thailand 2019 เข้ารอบ 32 ทีม',
         year: '2019',
         issuer: 'Robot Olympiad Thailand',
-        images: ['image/cer1.png']
+        images: ['/image/cer1.png']
       },
       {
         id: 'cer2',
@@ -232,7 +232,7 @@ const getSampleData = (): Student[] => {
         description: 'การแข่งขัน Game ROV รายการเครือโรงเรียนอัสสัมชัญทั่วประเทศ',
         year: '2019',
         issuer: 'เครือโรงเรียนอัสสัมชัญ',
-        images: ['image/cer2.png']
+        images: ['/image/cer2.png']
       },
       {
         id: 'cer3',
@@ -240,7 +240,7 @@ const getSampleData = (): Student[] => {
         description: 'การแข่งขัน Crossword งานศิลปหัตถกรรมนักเรียน ครั้งที่ 69 ปีการศึกษา 2562 ระดับเขตพื้นที่ สพม.35 ลป.1',
         year: '2019',
         issuer: 'สำนักงานเขตพื้นที่การศึกษามัธยมศึกษา เขต 35',
-        images: ['image/cer3.png']
+        images: ['/image/cer3.png']
       }
     ],
     portfolioProjects: [
@@ -254,7 +254,7 @@ const getSampleData = (): Student[] => {
         images: []
       }
     ],
-    profileImage: 'image/รูปนักเรียน.jpg',
+    profileImage: '/image/รูปนักเรียน.jpg',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };
