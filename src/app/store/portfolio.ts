@@ -589,27 +589,44 @@ const usePortfolioStore = create<PortfolioStore>()(
       }),
       {
         name: 'portfolio-storage',
-        version: 1, // Add version to help with migrations
+        version: 2, // Increment version to trigger migration
+        migrate: (persistedState: any, version: number) => {
+          console.log('Migrating portfolio store from version:', version);
+          
+          // Handle migration from version 1 to 2
+          if (version < 2) {
+            // Ensure all students have the required fields and fix image paths
+            if (persistedState?.students) {
+              persistedState.students = persistedState.students.map((stu: any) => ({
+                ...stu,
+                activities: stu.activities?.map((act: any) => ({
+                  ...act,
+                  images: act.images?.map((img: string) => 
+                    img.startsWith('/') ? img : (img.startsWith('image/') ? `/${img}` : `/image/${img}`)
+                  ) || []
+                })) || [],
+                certificates: stu.certificates?.map((cer: any) => ({
+                  ...cer,
+                  images: cer.images?.map((img: string) => 
+                    img.startsWith('/') ? img : (img.startsWith('image/') ? `/${img}` : `/image/${img}`)
+                  ) || []
+                })) || [],
+                portfolioProjects: stu.portfolioProjects || [],
+                profileImage: stu.profileImage ? 
+                  (stu.profileImage.startsWith('/') ? stu.profileImage : 
+                   (stu.profileImage.startsWith('image/') ? `/${stu.profileImage}` : `/image/${stu.profileImage}`)) 
+                  : undefined
+              }));
+            }
+          }
+          
+          return persistedState;
+        },
         onRehydrateStorage: () => (state) => {
           console.log('Rehydrating store...', state?.students?.length || 0, 'students found');
           if (state && state.students && state.students.length > 0) {
-            console.log('Found existing students, keeping them:', state.students.length);
-            // Only do migrations on existing data, don't replace with sample data
-            state.students = state.students.map(stu => ({
-              ...stu,
-              activities: stu.activities?.map(act => ({
-                ...act,
-                images: act.images?.map(img => img.endsWith?.('.svg') ? img.replace('.svg', '.png') : img) || []
-              })) || [],
-              certificates: stu.certificates?.map(cer => ({
-                ...cer,
-                images: cer.images?.map(img => img.endsWith?.('.svg') ? img.replace('.svg', '.png') : img) || []
-              })) || [],
-              portfolioProjects: stu.portfolioProjects || [], // Ensure portfolioProjects exists
-              profileImage: stu.profileImage?.endsWith?.('.svg') ? stu.profileImage.replace('.svg', '.jpg') : stu.profileImage
-            }));
+            console.log('Found existing students after migration:', state.students.length);
           }
-          // Don't automatically add sample data - let initializeData handle this if needed
         },
       }
     ),
