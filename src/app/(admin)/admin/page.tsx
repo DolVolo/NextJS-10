@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useMembers, useMemberActions, useIsFormOpen } from "../../store/member";
 import MemberForm from "../../components/MemberForm";
 
@@ -30,7 +31,7 @@ export default function AdminPage() {
           <div className="flex justify-between items-center">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Dashboard</h1>
-              <p className="text-gray-600">Welcome back! Here's what's happening with your site.</p>
+              <p className="text-gray-600">Welcome back! Here&apos;s what&apos;s happening with your site.</p>
             </div>
             <button
               onClick={openForm}
@@ -148,7 +149,7 @@ export default function AdminPage() {
                 </div>
               </button>
 
-              <a 
+              <Link 
                 href="/member/addmember"
                 className="block w-full text-left p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
               >
@@ -159,7 +160,7 @@ export default function AdminPage() {
                     <p className="text-sm text-gray-500">Advanced member management</p>
                   </div>
                 </div>
-              </a>
+              </Link>
 
               <button className="w-full text-left p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
                 <div className="flex items-center">

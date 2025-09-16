@@ -1,6 +1,9 @@
 // Example of how to integrate real image uploads
 // This would replace the static image references
 
+import { useState } from 'react';
+// import ImageUpload from '@/components/ImageUpload'; // Uncomment when ImageUpload is available
+
 // Modified Student interface
 export interface Activity {
   id: string;
@@ -15,7 +18,7 @@ export interface Activity {
 }
 
 // Usage in form component
-function ActivityForm() {
+export function ActivityForm() {
   const [activity, setActivity] = useState<Activity>({
     id: '',
     title: '',
@@ -66,10 +69,12 @@ function ActivityForm() {
         </div>
         
         {/* Upload new image */}
+        {/* Uncomment when ImageUpload component is available
         <ImageUpload
           onImageSelect={handleImageUpload}
           placeholder="เพิ่มรูปภาพกิจกรรม"
         />
+        */}
       </div>
     </div>
   );

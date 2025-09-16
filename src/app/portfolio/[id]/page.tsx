@@ -323,7 +323,7 @@ export default function StudentDetailPage() {
                   กิจกรรมและรางวัล
                 </h3>
                 <div className="space-y-6">
-                  {student.activities.map((activity, index) => (
+                  {student.activities.map((activity, _index) => (
                     <div key={activity.id} className="border border-gray-200 rounded-lg p-4">
                       <div className="flex items-start justify-between mb-3">
                         <div>
@@ -396,7 +396,7 @@ export default function StudentDetailPage() {
                   ใบรับรองและประกาศนียบัตร
                 </h3>
                 <div className="space-y-6">
-                  {student.certificates.map((certificate, index) => (
+                  {student.certificates.map((certificate, _index) => (
                     <div key={certificate.id} className="border border-green-200 rounded-lg p-4 bg-green-50">
                       <div className="flex items-start justify-between mb-3">
                         <div>
@@ -467,7 +467,7 @@ export default function StudentDetailPage() {
                   ผลงาน/โครงงาน Portfolio
                 </h3>
                 <div className="space-y-6">
-                  {student.portfolioProjects.map((project, index) => (
+                  {student.portfolioProjects.map((project, _index) => (
                     <div key={project.id} className="border border-purple-200 rounded-lg p-4 bg-purple-50">
                       <div className="flex items-start justify-between mb-3">
                         <div>

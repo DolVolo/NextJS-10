@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 export default function TeacherPage() {
   const { students, searchTerm, sortField, sortDirection } = usePortfolioData();
-  const { openForm, setEditingStudent, deleteStudent, setSearchTerm, setSorting, initializeData, initializeWithSampleData, loadAllSampleData } = usePortfolioActions();
+  const { openForm, setEditingStudent, deleteStudent, setSearchTerm, setSorting, initializeData, loadAllSampleData } = usePortfolioActions();
   const { getSortedStudents, getStudentStats } = usePortfolioComputed();
   
   const [isHydrated, setIsHydrated] = useState(false);

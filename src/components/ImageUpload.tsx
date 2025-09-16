@@ -45,6 +45,7 @@ export default function ImageUpload({ onImageSelect, currentImage, placeholder }
       };
       reader.readAsDataURL(file);
     } catch (error) {
+      console.error('Upload error:', error);
       alert('เกิดข้อผิดพลาดในการอัพโหลด');
       setUploading(false);
     }

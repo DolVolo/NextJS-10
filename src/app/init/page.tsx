@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import usePortfolioStore from '@/app/store/portfolio';
+import usePortfolioStore, { Student } from '@/app/store/portfolio';
 import Link from 'next/link';
 
 export default function InitPage() {
@@ -70,7 +70,7 @@ export default function InitPage() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {students.map((student: any) => (
+                  {students.map((student: Student) => (
                     <tr key={student.id} className="hover:bg-gray-50">
                       <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">
                         {student.studentId}

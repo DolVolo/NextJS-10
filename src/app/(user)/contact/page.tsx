@@ -50,7 +50,7 @@ export default function ContactPage() {
         <div className="bg-white rounded-lg shadow">
           <div className="p-6 border-b border-gray-200">
             <h2 className="text-2xl font-semibold text-gray-900">Send a Message</h2>
-            <p className="text-gray-600 mt-1">Fill out the form below and we'll get back to you soon</p>
+            <p className="text-gray-600 mt-1">Fill out the form below and we&apos;ll get back to you soon</p>
           </div>
           <div className="p-6">
             <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>

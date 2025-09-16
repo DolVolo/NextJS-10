@@ -1,6 +1,6 @@
 'use client';
 
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useMemberStore, MemberFormData } from '../store/member';
 import { useEffect } from 'react';
 
@@ -14,7 +14,6 @@ export default function MemberForm({ onClose }: MemberFormProps) {
   const {
     register,
     handleSubmit,
-    control,
     reset,
     formState: { errors, isSubmitting },
     setValue,

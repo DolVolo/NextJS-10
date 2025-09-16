@@ -1,6 +1,6 @@
 'use client';
 
-import { useForm, Controller, useFieldArray } from 'react-hook-form';
+import { useForm, useFieldArray } from 'react-hook-form';
 import { usePortfolioActions, usePortfolioData, PortfolioFormData, Activity, Certificate } from '../store/portfolio';
 import { useEffect, useState } from 'react';
 
@@ -234,7 +234,7 @@ export default function PortfolioForm({ onClose }: PortfolioFormProps) {
               <button
                 key={section.id}
                 type="button"
-                onClick={() => setCurrentSection(section.id as any)}
+                onClick={() => setCurrentSection(section.id as 'personal' | 'education' | 'application' | 'activities')}
                 className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                   currentSection === section.id
                     ? 'bg-blue-600 text-white'
@@ -872,7 +872,7 @@ export default function PortfolioForm({ onClose }: PortfolioFormProps) {
                   onClick={() => {
                     const currentIndex = sections.findIndex(s => s.id === currentSection);
                     if (currentIndex > 0) {
-                      setCurrentSection(sections[currentIndex - 1].id as any);
+                      setCurrentSection(sections[currentIndex - 1].id as 'personal' | 'education' | 'application' | 'activities');
                     }
                   }}
                   className="px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors"
@@ -887,7 +887,7 @@ export default function PortfolioForm({ onClose }: PortfolioFormProps) {
                   onClick={() => {
                     const currentIndex = sections.findIndex(s => s.id === currentSection);
                     if (currentIndex < sections.length - 1) {
-                      setCurrentSection(sections[currentIndex + 1].id as any);
+                      setCurrentSection(sections[currentIndex + 1].id as 'personal' | 'education' | 'application' | 'activities');
                     }
                   }}
                   className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"

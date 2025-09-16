@@ -7,7 +7,7 @@ import { useMemberStore } from "../../../store/member";
 import { useEffect, useState } from "react";
 
 type MemberPageProps = {
-	params: Promise<{ id: string }> | { id: string }; // Next 15 may pass a promise
+	params: Promise<{ id: string }>;
 };
 
 export default function MemberDetailPage({ params }: MemberPageProps) {

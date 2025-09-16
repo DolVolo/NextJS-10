@@ -2,9 +2,34 @@
 
 import { useEffect, useState } from 'react';
 
+interface ImageTestResult {
+  exists: boolean;
+  status?: string;
+  width?: number;
+  height?: number;
+  error?: string;
+}
+
+interface ImageTests {
+  [imagePath: string]: ImageTestResult;
+}
+
+interface StorageData {
+  state?: {
+    students?: Array<{
+      firstName?: string;
+      lastName?: string;
+      activities?: Array<{ images?: string[] }>;
+      certificates?: Array<{ images?: string[] }>;
+      portfolioProjects?: Array<{ images?: string[] }>;
+      profileImage?: string;
+    }>;
+  };
+}
+
 export default function DebugImages() {
-  const [data, setData] = useState<any>(null);
-  const [imageTests, setImageTests] = useState<any>({});
+  const [data, setData] = useState<StorageData | null>(null);
+  const [imageTests, setImageTests] = useState<ImageTests>({});
 
   useEffect(() => {
     // Get localStorage data
@@ -15,16 +40,16 @@ export default function DebugImages() {
 
     // Test image loading
     const testImages = ['act1.png', 'act2.png', 'act3.png', 'act4.png', 'cer1.png', 'cer2.png', 'cer3.png'];
-    const results: any = {};
+    const results: ImageTests = {};
 
     testImages.forEach(img => {
       const imgElement = new Image();
       imgElement.onload = () => {
-        results[img] = { status: 'success', width: imgElement.width, height: imgElement.height };
+        results[img] = { exists: true, status: 'success', width: imgElement.width, height: imgElement.height };
         setImageTests({...results});
       };
       imgElement.onerror = () => {
-        results[img] = { status: 'error', error: 'Failed to load' };
+        results[img] = { exists: false, status: 'error', error: 'Failed to load' };
         setImageTests({...results});
       };
       imgElement.src = `/image/${img}`;
@@ -50,7 +75,7 @@ export default function DebugImages() {
                   
                   <div className="mt-4">
                     <h3 className="font-semibold">Activity Images:</h3>
-                    {data.state.students[0].activities?.map((act: any, i: number) => (
+                    {data.state.students[0].activities?.map((act: { title?: string; images?: string[] }, i: number) => (
                       <div key={i} className="ml-4">
                         <p>{act.title}: {JSON.stringify(act.images)}</p>
                       </div>
@@ -59,7 +84,7 @@ export default function DebugImages() {
                   
                   <div className="mt-4">
                     <h3 className="font-semibold">Certificate Images:</h3>
-                    {data.state.students[0].certificates?.map((cer: any, i: number) => (
+                    {data.state.students[0].certificates?.map((cer: { title?: string; images?: string[] }, i: number) => (
                       <div key={i} className="ml-4">
                         <p>{cer.title}: {JSON.stringify(cer.images)}</p>
                       </div>
@@ -84,7 +109,7 @@ export default function DebugImages() {
         <div className="bg-white p-6 rounded-lg shadow">
           <h2 className="text-xl font-semibold mb-4">Image Loading Tests</h2>
           <div className="space-y-2">
-            {Object.entries(imageTests).map(([img, result]: [string, any]) => (
+            {Object.entries(imageTests).map(([img, result]: [string, ImageTestResult]) => (
               <div key={img} className="flex items-center justify-between p-2 border rounded">
                 <span>{img}</span>
                 <span className={result.status === 'success' ? 'text-green-600' : 'text-red-600'}>

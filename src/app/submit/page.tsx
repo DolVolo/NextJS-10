@@ -215,6 +215,7 @@ export default function SubmitPortfolioPage() {
       }, 1000);
       
     } catch (error) {
+      console.error('Submit error:', error);
       alert('เกิดข้อผิดพลาดในการส่งข้อมูล กรุณาลองใหม่อีกครั้ง');
     } finally {
       setIsSubmitting(false);

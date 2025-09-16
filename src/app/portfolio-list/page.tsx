@@ -238,7 +238,7 @@ export default function PortfolioListPage() {
                           {student.firstName} {student.lastName}
                         </h3>
                         {student.nickname && (
-                          <p className="text-sm text-gray-500">"{student.nickname}"</p>
+                          <p className="text-sm text-gray-500">&quot;{student.nickname}&quot;</p>
                         )}
                       </div>
                       <div className="text-gray-400 group-hover:text-blue-500 transition-colors">

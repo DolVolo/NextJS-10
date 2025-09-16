@@ -309,7 +309,7 @@ const getSampleData = (): Student[] => {
     { id: '6704101345', name: 'นายบุญนุชัย บุญเต็ม', gpa: 2.00 }
     // ... add more as needed
   ].map((student, index) => {
-    const [title, ...nameParts] = student.name.split(' ');
+    const [_title, ...nameParts] = student.name.split(' ');
     const firstName = nameParts[0] || '';
     const lastName = nameParts.slice(1).join(' ') || '';
 

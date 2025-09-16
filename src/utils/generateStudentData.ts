@@ -151,8 +151,8 @@ const generateStudentData = () => {
     'มหาวิทยาลัยธรรมศาสตร์'
   ];
 
-  return students.map((student, index) => {
-    const [title, ...nameParts] = student.name.split(' ');
+  return students.map((student, _index) => {
+    const [_title, ...nameParts] = student.name.split(' ');
     const firstName = nameParts[0] || '';
     const lastName = nameParts.slice(1).join(' ') || '';
 
