@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear Portfolio Storage</title>
+</head>
+<body>
+    <h1>Clear Portfolio Storage</h1>
+    <button onclick="clearStorage()">Clear localStorage</button>
+    <p id="status"></p>
+    
+    <script>
+        function clearStorage() {
+            // Clear all localStorage data
+            localStorage.clear();
+            // Also specifically clear the portfolio storage key
+            localStorage.removeItem('portfolio-storage');
+            document.getElementById('status').textContent = 'Storage cleared! Now refresh the portfolio app.';
+        }
+        
+        // Auto-clear on load
+        window.onload = function() {
+            clearStorage();
+            setTimeout(() => {
+                window.location.href = 'http://localhost:3000/teacher';
+            }, 2000);
+        };
+    </script>
+</body>
+</html>

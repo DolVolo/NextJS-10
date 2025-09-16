@@ -12,7 +12,7 @@ export default function MemberPage() {
             <div className="max-w-4xl mx-auto">
                 {/* Header */}
                 <div className="mb-8">
-                    <h1 className="text-4xl font-bold text-gray-900 mb-2">EXO Members</h1>
+                    <h1 className="text-4xl font-bold text-gray-900 mb-2">BUS Members</h1>
                     <p className="text-gray-600">Meet our talented 12-member K-pop group</p>
                 </div>
 
