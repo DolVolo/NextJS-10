@@ -4,6 +4,9 @@
 import Link from "next/link";
 import { useMembers } from "../../store/member";
 
+// Force dynamic rendering to avoid prerender issues with Zustand
+export const dynamic = 'force-dynamic';
+
 export default function MemberPage() {
     const members = useMembers();
     

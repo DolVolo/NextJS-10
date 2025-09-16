@@ -4,6 +4,9 @@
 
 import { useState } from "react";
 
+// Force dynamic rendering to avoid prerender issues
+export const dynamic = 'force-dynamic';
+
 export default function AdminPage() {
   const [stats] = useState({
     totalMembers: 12,

@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react';
 import { usePortfolioData, usePortfolioActions } from '@/app/store/portfolio';
 import Link from 'next/link';
 
+// Force dynamic rendering to avoid prerender issues with Zustand
+export const dynamic = 'force-dynamic';
+
 export default function PortfolioListPage() {
   const { students } = usePortfolioData();
   const { initializeData } = usePortfolioActions();

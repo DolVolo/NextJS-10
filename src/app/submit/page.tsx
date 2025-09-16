@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { usePortfolioActions } from '@/app/store/portfolio';
 import { useRouter } from 'next/navigation';
 
+// Force dynamic rendering to avoid prerender issues with Zustand
+export const dynamic = 'force-dynamic';
+
 export default function SubmitPortfolioPage() {
   const { addStudent } = usePortfolioActions();
   const router = useRouter();

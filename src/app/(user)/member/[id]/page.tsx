@@ -6,6 +6,9 @@ import { notFound } from "next/navigation";
 import { useMemberStore } from "../../../store/member";
 import { useEffect, useState } from "react";
 
+// Force dynamic rendering to avoid prerender issues with Zustand
+export const dynamic = 'force-dynamic';
+
 type MemberPageProps = {
 	params: Promise<{ id: string }>;
 };

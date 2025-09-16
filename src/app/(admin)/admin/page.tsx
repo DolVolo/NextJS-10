@@ -5,6 +5,9 @@ import Link from "next/link";
 import { useMembers, useMemberActions, useIsFormOpen } from "../../store/member";
 import MemberForm from "../../components/MemberForm";
 
+// Force dynamic rendering to avoid prerender issues with Zustand
+export const dynamic = 'force-dynamic';
+
 export default function AdminPage() {
   const members = useMembers();
   const { openForm, deleteMember, setEditingMember } = useMemberActions();

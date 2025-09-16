@@ -6,6 +6,9 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Student } from '../../store/portfolio';
 
+// Force dynamic rendering to avoid prerender issues with Zustand
+export const dynamic = 'force-dynamic';
+
 export default function StudentDetailPage() {
   const params = useParams();
   const { getStudent } = usePortfolioActions();

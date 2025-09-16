@@ -5,6 +5,9 @@ import { usePortfolioData, usePortfolioActions, usePortfolioComputed } from '../
 import PortfolioForm from '../components/PortfolioForm';
 import Link from 'next/link';
 
+// Force dynamic rendering to avoid prerender issues with Zustand
+export const dynamic = 'force-dynamic';
+
 export default function TeacherPage() {
   const { students, searchTerm, sortField, sortDirection } = usePortfolioData();
   const { openForm, setEditingStudent, deleteStudent, setSearchTerm, setSorting, initializeData, loadAllSampleData } = usePortfolioActions();
